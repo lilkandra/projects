@@ -1,0 +1,19 @@
+.jumbotron {
+    text-align: center;
+    background: none;
+}
+.sectionDark {
+    background-color:navajowhite;
+}
+.coin-input {
+    display: block;
+    margin: auto;
+}
+h4 {
+    text-align: center;
+}
+.convert {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+}
