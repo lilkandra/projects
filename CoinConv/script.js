@@ -6,7 +6,9 @@ var result_body = document.getElementById('result_body');
 document.getElementById('polite_msg').style.display = "none";
 document.getElementById('conv_result').style.display = "none";
 function modify_symbol() {
-    if (amount_coin.value == 2)
+    if (amount_coin.value == 1)
+        coin_symbol.innerText = "$";
+    else if (amount_coin.value == 2)
         coin_symbol.innerText = "€";
     else if (amount_coin.value == 3)
         coin_symbol.innerText = "TND";
