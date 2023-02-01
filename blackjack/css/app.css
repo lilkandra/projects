@@ -1,0 +1,18 @@
+.sectionStart {
+  background-color: darkslategray;
+  padding: 2rem; }
+
+.navbar-light {
+  background-color: lightcyan; }
+
+.start-img {
+  margin: auto;
+  display: block; }
+
+.btn-start {
+  background-color: lightcyan;
+  display: block;
+  margin: auto;
+  width: 100px; }
+
+/*# sourceMappingURL=app.css.map */
