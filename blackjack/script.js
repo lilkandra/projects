@@ -13,6 +13,9 @@ var amount = parseFloat(input_amount.value);
 var end_msg = document.getElementById('end_msg');
 var card_back = document.getElementById('card_back');
 var bet = parseFloat(bet_input.value);
+var dealer_deck = document.getElementById('dealer_deck');
+var player_deck = document.getElementById('player_deck');
+var is_done;
 
 class card {
     constructor(name, val) {
@@ -77,6 +80,7 @@ function Game_display() {
     dealer_sum.style.display = "none";
     player_sum.style.display = "none";
     end_msg.style.display = "none";
+    document.getElementById('lose_msg').style.display = "none";
     amount_output.innerText = "AMOUNT: " + amount + "$";
 }
 function Start_display() {
@@ -108,6 +112,7 @@ function Player_card(card) {
     var card_img = document.createElement('img');
     card_img.src = logo_card + ".png";
     document.getElementById('player_deck').appendChild(card_img);
+    card_img.classList.add("card-img");
     sum_change(card,"player");
 }
 function Dealer_card(card) {
@@ -115,18 +120,20 @@ function Dealer_card(card) {
     var card_img = document.createElement('img');
     card_img.src = logo_card + ".png";
     document.getElementById('dealer_deck').appendChild(card_img);
+    card_img.classList.add("card-img");
     sum_change(card,"dealer");
 }
 function Back_card() {
     var img = document.createElement('img');
     img.src = "assets/back_card.jpg";
-    document.getElementById('card_back').appendChild(img);
+    document.getElementById('dealer_deck').appendChild(img);
     img.setAttribute('id','b_card');
+    img.classList.add("card-img");
 }
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
-function hit_stand() {
+async function hit_stand() {
     if (player_sum.value == 21) {
         var bet = parseFloat(bet_input.value);
         var amount = parseFloat(input_amount.value);
@@ -134,7 +141,8 @@ function hit_stand() {
         end_msg.innerText = "BLACKJACK!"
         end_msg.style.display = "block";
         amount_output.innerText = "AMOUNT: " + input_amount.value + "$";
-    
+        await delay(1000);
+        Stand();
     }
     else
         stand_hit.style.display = "block";
@@ -146,6 +154,7 @@ async function Dealer_hit(card) {
     card_img.src = logo_card + ".png";
     await delay(1000);
     img.replaceWith(card_img);
+    card_img.classList.add("card-img");
     sum_change(card,"dealer");
     while (dealer_sum.value<17) {
         await delay(1000);
@@ -175,7 +184,7 @@ function push() {
     end_msg.style.display = "block";
     amount_output.innerText = "AMOUNT: " + input_amount.value;
 }
-function check_win () {
+async function check_win () {
     if (end_msg.style.display == "none") {
         if (dealer_sum.value>21 || dealer_sum.value<player_sum.value) {
             win();
@@ -187,7 +196,38 @@ function check_win () {
             lose();
     }
 }
-
+async function Replay_display() {
+    var amount = parseFloat(input_amount.value);
+    var dealer_cards = dealer_deck.lastElementChild;
+    var player_cards = player_deck.lastElementChild;
+    if (is_done) {
+        await delay(3000);
+        while (dealer_cards) {
+            dealer_deck.removeChild(dealer_cards);
+            dealer_cards = dealer_deck.lastElementChild;
+        }
+        while (player_cards) {
+            player_deck.removeChild(player_cards);
+            player_cards = player_deck.lastElementChild;
+        }
+        if (amount>0) {
+            Game_display();
+            place_bet.style.display = "block";
+            btn_deal.style.display = "block";
+        }
+        else {
+            document.getElementById('lose_msg').style.display = "block";
+            player_sum.style.display = "none";
+            dealer_sum.style.display = "none";
+            end_msg.style.display = "none";
+        }
+    }
+    else {
+        await delay(200);
+        Replay_display();
+    }
+    
+}
 /***************************************/
 
 Start_display();
@@ -200,6 +240,7 @@ function startGame() {
 }
 
 async function startDeal() {
+    is_done = false;
     if (check_bet()) {
         Deal_display();
         player_sum.value = 0;
@@ -213,6 +254,8 @@ async function startDeal() {
         await delay(1000);
         Dealer_card(cards.random());
         hit_stand();
+        Replay_display();
+        
     }
     else
         document.getElementById('bet_msg').innerText = "ENTER A VALID BET!"; 
@@ -232,9 +275,8 @@ async function Hit() {
 async function Stand() {
     stand_hit.style.display = "none";
     await Dealer_hit(cards.random());
-    check_win();
-    await delay(2000);
-    Game_display();
+    await check_win();
+    is_done = true;
 }
 
 
