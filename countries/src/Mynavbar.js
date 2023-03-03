@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-import { type } from '@testing-library/user-event/dist/type';
+
 
 const Mynavbar = ({updateCountire}) => {
   const [searchTerm, setSearchTerm] = useState('');

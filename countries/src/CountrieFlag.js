@@ -7,8 +7,8 @@ const CountrieFlag = ({countrie}) => {
                 <img src = {countrie.flags.png} alt="countrie"/>
             </div>
             <div>
-            <h2>{countrie.name.common}</h2>
-            <p>{countrie.region}</p>
+                <h2>{countrie.name.common}</h2>
+                <p>{countrie.region}</p>
             </div>
         </div>
     );
