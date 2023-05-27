@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/ddfdcacb4c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Coin Converter</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">CoinConv</span>
+        </nav>
+        <div class="sectionDark">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">Welcome to CoinConv</h1>
+                            <p class="lead">You can convert an amount to different coins</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5 col-lg-4 c1">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend coin-input">
+                          <label class="input-group-text" for="inputGroupSelect01">Coins</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01" onchange="modify_symbol()">
+                          <option selected>Choose...</option>
+                          <option onclick="modify_doll()" id="dollar" value="1">Dollar</option>
+                          <option value="2">Euro</option>
+                          <option value="3">Dinar</option>
+                          <option value="4">Bitcoin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-lg-1">
+                    <h4>To</h4>
+                </div>
+                <div class="col-sm-5 col-lg-4 c1">
+                    <div  id="Select1" class="input-group mb-3">
+                        <div class="input-group-prepend coin-input">
+                          <label class="input-group-text" for="inputGroupSelect02">Coins</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect02">
+                          <option selected>Choose...</option>
+                          <option value="1">Dollar</option>
+                          <option value="2">Euro</option>
+                          <option value="3">Dinar</option>
+                          <option value="4">Bitcoin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3 c1">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="coin_symbol"><i class="fa-solid fa-coins"></i></span>
+                          <span class="input-group-text">1.00</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="amount">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-lg convert" onclick="convert()">Convert</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-sm-7">
+                    <div class="alert alert-danger" id="polite_msg" role="alert">
+                        Please enter an amount to convert.
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-sm-12 col-lg-6">
+                    <div class="card" id="conv_result">
+                        <div class="card-body" id="result_body">
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>    
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body>

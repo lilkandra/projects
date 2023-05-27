@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+  }
+  :root {
+    --font-roboto: "Roboto Slab", serif;
+    --font-raleway: "Raleway", sans-serif;
+  }
+  body {
+    font-family: var(--font-roboto);
+    background-image: URL('./1vVBz2S.jpg');
+    background-attachment: fixed;
+  }
+  .app {
+    margin-top: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .Empty {
+    width: 100%;
+    margin-top: 3rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 580px;
+  }
+  .empty h1 {
+    font-size: 1.25rem;
+    font-family: var(--font-raleway);
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    margin: 3rem,0rem;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .Flag {
+    width: 320px;
+    height: 200px;
+    margin: 0.5rem;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    border: none;
+  }
+  .Flag div:nth-of-type(1) {
+    width: 100%;
+    height: 100%;
+  }
+  .Flag div:nth-of-type(1) img {
+    width: 100%;
+    height: 100%;
+  }
+  .Flag div:nth-of-type(2) {
+    z-index: 2;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    padding: 3rem;
+    padding-left: 6rem;
+  }
+  .Flag div:nth-of-type(2) h2 {
+    font-family: "Roboto Slab", serif;
+    font-size: 30px;
+    color:lightsalmon;
+  }
+  .Flag div:nth-of-type(2) p {
+    font-size: 20px;
+    color:lightsalmon;
+  }
+  .Flag:hover div:nth-of-type(1) {
+    opacity: 0.3;
+  }
+  .Flag:hover div:nth-of-type(2) {
+    opacity: 1;
+  }
+  .form-select {
+    margin-right: 7px;
+  }
+  .countrieDef {
+    width: 100%;
+    height: 780px;
+    background-image: url('./istockphoto-1292555104-612x612.jpg');
+  }
+  .countrieFlag {
+    width: 100%;
+  }
+  .coatOfArms {
+    height: 300px;
+    bottom: 0;
+  } 
+  .countrieName h2 {
+    font-family: "Roboto Slab", serif;
+    font-size: 70px;
+  }
+  .return {
+    margin-top: 20px;
+  }
+  .countrieInfos h3 {
+    font-size: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  .divPages {
+    width: 100%;
+  }
+  
