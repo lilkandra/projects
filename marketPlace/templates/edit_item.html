@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+	<title>MP-Edit Item</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+		}
+        .item-pic {
+			width: 200px;
+			height: 200px;
+			border-radius: 10%;
+			object-fit: cover;
+			object-position: center;
+			margin: 0 auto;
+			display: block;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+		}
+		.container {
+			background-color: #ffffff;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			padding: 30px;
+			margin-top: 40px;
+			max-width: 600px;
+			
+		}
+
+		h2 {
+			margin-top: 0;
+			margin-bottom: 30px;
+			text-align: center;
+		}
+
+		label {
+			font-weight: bold;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"] {
+			background-color: #f2f2f2;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			padding: 10px;
+			margin-bottom: 20px;
+			width: 100%;
+			max-width: 500px;
+		}
+
+		button[type="submit"] {
+			background-color: #007bff;
+			border: none;
+			border-radius: 5px;
+			color: #ffffff;
+			font-weight: bold;
+			margin-top: 10px;
+			padding: 10px 20px;
+			display: flex;
+		}
+		.cp {
+			margin-left: 200px;
+		}
+	</style>
+	<link rel="icon" href="../static/assets/marketplace.png">
+</head>
+<body>
+	
+	<div class="container">
+		<h2>Edit Item</h2>
+		<img class="item-pic" src="{{item.photo.url}}" alt="Item picture">
+		{% if user_form.errors %}
+			<div class="alert alert-danger alert-dismissible" role="alert">
+				<div id="form_errors">
+					{% for key, value in user_form.errors.items %}
+						<strong>{{ value }}</strong>
+					{% endfor %}
+				</div>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+    	{% endif %}
+		<form action="edit" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form }}
+			<button type="button" class="btn btn-danger" onclick="window.location.href='/delete/{{item.id}}'">Delete Item</button>
+			<button type="submit" class="btn btn-success">Save Changes</button>
+		</form>
+	</div>
+	{% for message in messages %}
+    <div class="alert alert-secondary" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,100 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <title>MP-sign up</title>
+    <style>
+      body.signup-body {
+      background-color:ivory;
+      }
+      .container.signup-container {
+          margin-top: 4%;
+      }
+      .card.signup-card {
+          background-color:royalblue;
+          padding:40px, 0px, 20px;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      form.signup-form {
+          padding-top: 4%;
+          max-width: 400px;
+          margin: auto;  
+      }
+      h4, h5 {
+          font-family: "Gill Sans", sans-serif;
+          color: white;
+      }
+
+    </style>
+    <link rel="icon" href="../static/assets/marketplace.png">
+  </head>
+  <body class="signup-body">
+    <div class="container signup-container">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-sm-12 col-md-8">
+            <div class="card signup-card">
+              <div class="card-body">
+                <form method="POST" enctype="multipart/form-data" class="signup-form">
+                  {% csrf_token %}
+                  <h4>Create Item</h4>
+                  <input class="form-control form-control-lg" type="text" placeholder="Title" name="title">
+                  <textarea class="form-control" name="description" rows="3" placeholder="Description"></textarea>
+                  <div class="input-group mb-3">
+                      <span class="input-group-text">$</span>
+                      <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Price" name="price">
+                      <span class="input-group-text">.00</span>
+                  </div>
+                  <h5>Category</h5>
+                  <select class="form-select" aria-label="Default select example" name="category">
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Music">Music</option>
+                    <option value="House">House</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <h5>Location</h5>
+                  <select class="form-select" aria-label="Default select example" name="location">
+                    <option value="Tunis">Tunis</option>
+                    <option value="Ariana">Ariana</option>
+                    <option value="Ben Arous">Ben Arous</option>
+                    <option value="Manouba">Manouba</option>
+                    <option value="Nabeul">Nabeul</option>
+                    <option value="Zaghouan">Zaghouan</option>
+                    <option value="Bizerte">Bizerte</option>
+                    <option value="Beja">Beja</option>
+                    <option value="Jandouba">Jandouba</option>
+                    <option value="Kef">Kef</option>
+                    <option value="Seliana">Seliana</option>
+                    <option value="Sousse">Sousse</option>
+                    <option value="Monastir">Monastir</option>
+                    <option value="Mahdia">Mahdia</option>
+                    <option value="Sfax">Sfax</option>
+                    <option value="Kairouan">Kairouan</option>
+                    <option value="Kesserine">Kasserine</option>
+                    <option value="Sidi Bouzid">Sidi Bouzid</option>
+                    <option value="Gabes">Gabes</option>
+                    <option value="Mednine">Mednine</option>
+                    <option value="Tataouine">Tataouine</option>
+                    <option value="Gafsa">Gafsa</option>
+                    <option value="Tozeur">Tozeur</option>
+                    <option value="Kebili">Kebili</option>
+                  </select>
+                  <div class="mb-3">
+                    <h5>Upload Photo</h5>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple name="photo">
+                  </div>
+                  <button type="submit" class="btn btn-success">Create Item</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MP-Chat</title>
+    <style>
+      /* Style for the overall layout */
+      .container {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      /* Style for the conversation list */
+      .conversation-list {
+        width: 20%;
+        height: 100%;
+        background-color: #f2f2f2;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      
+      /* Style for the conversation list items */
+      .conversation-list-item {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      .avatar {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        border-radius: 50%;
+        background-color: #007bff;
+        background-image: url('https://via.placeholder.com/50x50');
+        background-size: cover;
+      }
+      .conversation .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+      }
+      .conversation .title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .conversation .subtitle {
+        font-size: 14px;
+        color: #999;
+      }
+      .conv_img {
+        width: 100%;
+        height: 100%;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      /* Style for the current conversation area */
+      .current-conversation {
+        width: 60%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+      }
+      
+      /* Style for the conversation header */
+      .conversation-header {
+        padding: 20px;
+        border-bottom: 1px solid #ccc;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      
+      .conversation {
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.user {
+  font-weight: bold;
+}
+
+.text {
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.date {
+  font-size: 12px;
+  color: #999;
+}
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+
+    input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+    background-color: #45a049;
+    }
+
+    </style>
+    <link rel="icon" href="../static/assets/marketplace.png">
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Conversation list -->
+      <div class="conversation-list">
+        {% if rooms %}
+        <h2>Conversations</h2>
+        {% for room in rooms %}
+            <a href="/change_curr/{{room.id}}">
+                <div class="conversation-list-item">
+                    <div class="avatar">
+                        <img src="{{room.item.photo.url}}" class="conv_img">
+                    </div>
+                    <div class="info">
+                        <div class="title">{{room.item.title}}</div>
+                        {% if room.buyer == user.profile %}
+                        <div class="subtitle">{{room.seller}}</div>
+                        {% else %}
+                        <div class="subtitle">{{room.buyer}}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        </form>
+        {% endfor %}
+        {% else %}
+        <h2>No conversations</h2>
+        {% endif %}
+      </div>
+      <input type="hidden" id="curr" name="current" value="{{current}}">
+      <!-- Current conversation area -->
+      <div class="current-conversation">
+        <div class="conversation-header" id="conv_title"></div>
+        {% if current %}
+        <div class="conversation" id="display">
+        </div>
+        <form id="post-form">
+            {% csrf_token %}
+            <input type="text" name="message" id="message" width="100px" />
+            <input type="submit" value="Send">
+        </form>  
+        {% else %}
+        <h2>Select a conversation</h2>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+<script type="text/javascript" src="../static/script/script.js"></script>
+</html>

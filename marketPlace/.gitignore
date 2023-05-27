@@ -1,0 +1,7 @@
+__psyache__
+static/
+static_root/
+media/
+venvdj/
+db.sqllite3
+.git/

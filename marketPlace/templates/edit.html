@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+	<title>MP-Edit Profile</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+		}
+        .profile-pic {
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			object-fit: cover;
+			object-position: center;
+			margin: 0 auto;
+			display: block;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+		}
+		.container {
+			background-color: #ffffff;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			padding: 30px;
+			margin-top: 40px;
+			max-width: 600px;
+			
+		}
+
+		h2 {
+			margin-top: 0;
+			margin-bottom: 30px;
+			text-align: center;
+		}
+
+		label {
+			font-weight: bold;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"] {
+			background-color: #f2f2f2;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			padding: 10px;
+			margin-bottom: 20px;
+			width: 100%;
+			max-width: 500px;
+		}
+
+		button[type="submit"] {
+			background-color: #007bff;
+			border: none;
+			border-radius: 5px;
+			color: #ffffff;
+			font-weight: bold;
+			margin-top: 10px;
+			padding: 10px 20px;
+			display: flex;
+		}
+		.cp {
+			margin-left: 200px;
+		}
+	</style>
+	<link rel="icon" href="../static/assets/marketplace.png">
+</head>
+<body>
+	
+	<div class="container">
+		<h2>Edit Profile</h2>
+		<img class="profile-pic" src="{{user.profile.photo.url}}" alt="Profile picture">
+		{% if user_form.errors %}
+			<div class="alert alert-danger alert-dismissible" role="alert">
+				<div id="form_errors">
+					{% for key, value in user_form.errors.items %}
+						<strong>{{ value }}</strong>
+					{% endfor %}
+				</div>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+    	{% endif %}
+		<form action="edit" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form }}
+			<div class="input-group mb-3">
+				<label class="input-group-text" for="picture">Change Picture</label>
+				{{profile_form.photo}}
+			</div>
+			<div class="form-group">
+				<label for="username">Username:</label>
+				{{ user_form.username }}
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label>
+				{{ user_form.email }}
+			</div>
+			<label for="address">Address</label>
+			{{ profile_form.address }}
+			<div class="form-group">
+				<label for="phone_number">Phone Number:</label>
+				{{ profile_form.phone_number }}
+			</div>
+			<button type="button" class="btn btn-primary" onclick="window.location.href='change_password'">
+				Change Password
+			</button>
+			<button type="submit" class="btn btn-success">Save Changes</button>
+		</form>
+	</div>
+</body>
+</html>
+
+    </body>
+</html>

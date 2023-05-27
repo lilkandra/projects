@@ -1,0 +1,244 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <title>Market Place</title>
+    <style>
+      .chat {
+        margin-left: 1050px;
+      }
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+        padding: 20px;
+        width: 300px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .card h2 {
+        margin-top: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .card p.price {
+        margin-top: auto;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      a {
+        text-decoration: none;
+      }
+      .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color:mintcream
+        ;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      select {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+      }
+
+      input[type="text"]::placeholder,
+      input[type="number"]::placeholder,
+      select option:first-child {
+        color: #bbb;
+      }
+
+      button[type="submit"] {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #0062cc;
+      }
+
+
+    </style>
+    <link rel="icon" href="../static/assets/marketplace.png">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">MARKET PLACE</a>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="create_item">CREATE ITEM</a>
+            </li>
+            <li class="nav-item chat">
+              <a class="nav-link" href="chat">CHAT</a>
+            </li>
+            <li class="nav-item dropdown account">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{user.username}}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="{{user.username}}">PROFILE</a></li>
+                <li><a class="dropdown-item" href="{{user.username}}/items">ITEMS</a></li>
+                <li><a class="dropdown-item" href="logout">LOG OUT</a></li>
+              </ul>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="login">CREATE ITEM</a>
+            </li>
+            <li class="nav-item" style="margin-left: 1100px;">
+              <button class="btn btn-secondary" type="button" onclick="window.location.href='login'">LOG IN</button>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% for message in messages %}
+    <div class="alert alert-secondary" role="alert">
+      {{message}}
+    </div>
+    {% endfor %}
+    <div class="row">
+      <div class="col-3">
+        <div class="search-container">
+          <form method="post" action="search">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="search-term">Search:</label>
+              <input type="text" id="search-term" name="search-term" placeholder="Enter search term...">
+            </div>
+            <div class="form-group">
+              <label for="category">Category:</label>
+              <select id="category" name="category">
+                <option value="All">All Categories</option>
+                <option value="Music">Music</option>
+                <option value="Electronics">Electronics</option>
+                <option value="House">House</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Sport">Sport</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="category">Location:</label>
+              <select id="location" name="location">
+                <option value="All">All locations</option>
+                <option value="Tunis">Tunis</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Ben Arous">Ben Arous</option>
+                <option value="Manouba">Manouba</option>
+                <option value="Nabeul">Nabeul</option>
+                <option value="Zaghouan">Zaghouan</option>
+                <option value="Bizerte">Bizerte</option>
+                <option value="Beja">Beja</option>
+                <option value="Jandouba">Jandouba</option>
+                <option value="Kef">Kef</option>
+                <option value="Seliana">Seliana</option>
+                <option value="Sousse">Sousse</option>
+                <option value="Monastir">Monastir</option>
+                <option value="Mahdia">Mahdia</option>
+                <option value="Sfax">Sfax</option>
+                <option value="Kairouan">Kairouan</option>
+                <option value="Kesserine">Kasserine</option>
+                <option value="Sidi Bouzid">Sidi Bouzid</option>
+                <option value="Gabes">Gabes</option>
+                <option value="Mednine">Mednine</option>
+                <option value="Tataouine">Tataouine</option>
+                <option value="Gafsa">Gafsa</option>
+                <option value="Tozeur">Tozeur</option>
+                <option value="Kebili">Kebili</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="price-range">Price Range:</label>
+              <input type="number" id="price-min" name="price-min" placeholder="Min">
+              <input type="number" id="price-max" name="price-max" placeholder="Max">
+            </div>
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="col-9">
+        <div class="card-container">
+          {% if items %}
+          {% for item in items %}
+          <a href="item/{{item.id}}">
+            <div class="card">
+              <img src="{{item.photo.url}}" alt="Item 1">
+              <h2>{{item.title}}</h2>
+              <p class="price">${{item.price}}</p>
+            </div>
+          </a>
+          {% endfor %}
+          {% else %}
+          <h1>No items found!</h1>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

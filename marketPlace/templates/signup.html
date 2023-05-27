@@ -1,0 +1,52 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../static/style/signup.css">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <title>MP-sign up</title>
+    <link rel="icon" href="../static/assets/marketplace.png">
+  </head>
+  <body class="signup-body">
+    <div class="container signup-container">
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-sm-12 col-md-8">
+            <div class="card signup-card">
+              <div class="card-body">
+                <img src="../static/assets/the-marketplace-white-logo.png" class="img-fluid signup-img">
+                <form class="signup-form" method="POST" action="sign-up">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <h4>Email:</h4>
+                    <input type="email" name="email" class="form-control" id="formGroupExampleInput">
+                  </div>
+                  <div class="form-group">
+                    <h4>Username:</h4>
+                    <input type="text" name="username" class="form-control" id="formGroupExampleInput">
+                  </div>
+                  <div class="form-group">
+                    <h4>Password:</h4>
+                    <input type="password" name="password" class="form-control" id="formGroupExampleInput2">
+                  </div>
+                  <div class="form-group">
+                    <h4>Confirm password:</h4>
+                    <input type="password" name="password2" class="form-control" id="formGroupExampleInput2">
+                  </div>
+                  <button type="submit" class="btn signup-btn btn-lg">Sign up</button>
+                  {% for message in messages %}
+                  <div class="alert alert-secondary" role="alert">
+                    {{message}}
+                  </div>
+                  {% endfor %}       
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+    </div>
+  </body>
+</html>
